@@ -3,6 +3,6 @@
     <string name="app_title">Flash Cards</string>
     <string name="button_start_learning">Start learning</string>
     <string name="button_credits">Credits</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="author">App made by\nPatryk Kudyk</string>
+    <string name="icons_author_1">Icons made by\nPixel perfect\n from flaticon.com</string>
 </resources>
