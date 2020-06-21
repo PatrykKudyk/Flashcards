@@ -3,6 +3,7 @@ package com.example.flashcards
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.flashcards.fragments.AddPackageFragment
 import com.example.flashcards.fragments.CreditsFragment
 import com.example.flashcards.fragments.MainMenuFragment
 import com.example.flashcards.fragments.PackagesFragment
@@ -10,7 +11,8 @@ import com.example.flashcards.fragments.PackagesFragment
 class MainActivity : AppCompatActivity(),
     MainMenuFragment.OnFragmentInteractionListener,
     CreditsFragment.OnFragmentInteractionListener,
-    PackagesFragment.OnFragmentInteractionListener {
+    PackagesFragment.OnFragmentInteractionListener,
+    AddPackageFragment.OnFragmentInteractionListener{
 
     private lateinit var mainMenuFragment: MainMenuFragment
 
