@@ -4,5 +4,6 @@
     <string name="button_start_learning">Start learning</string>
     <string name="button_credits">Credits</string>
     <string name="author">App made by\nPatryk Kudyk</string>
-    <string name="icons_author_1">Icons made by\nPixel perfect\n from flaticon.com</string>
+    <string name="icons_author_1">Icons made by\nFreepik\n from flaticon.com</string>
+    <string name="package_add_new">Add new package</string>
 </resources>
