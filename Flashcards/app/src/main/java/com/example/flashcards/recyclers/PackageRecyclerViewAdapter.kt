@@ -6,9 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.flashcards.MainActivity
 import com.example.flashcards.R
 import com.example.flashcards.db.DataBaseHelper
+import com.example.flashcards.fragments.FlashcardsFragment
 import com.example.flashcards.models.MyPackage
 import kotlinx.android.synthetic.main.row_package.view.*
 
@@ -34,9 +39,7 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
         val deleteYes = holder.view.package_cell_button_delete_yes
         val deleteNo = holder.view.package_cell_button_delete_no
         val titleEdit = holder.view.package_cell_name_edit_text
-
-
-
+        val cardView = holder.view.package_cell_card_view
 
         title.text = packagesList[position].title
         editButton.setOnClickListener {
@@ -89,6 +92,20 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
         deleteNo.setOnClickListener {
             holder.view.package_cell_linear_layout_main.visibility = View.VISIBLE
             holder.view.package_cell_linear_layout_delete.visibility = View.GONE
+        }
+
+        cardView.setOnClickListener {
+            val flashcardsFragment = FlashcardsFragment.newInstance(packagesList[position].id)
+            val manager = (holder.itemView.context as MainActivity).supportFragmentManager
+            manager
+                .beginTransaction()
+                .setCustomAnimations(
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left,
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right
+                )
+                .replace(R.id.main_frame_layout, flashcardsFragment)
+                .addToBackStack(FlashcardsFragment.toString())
+                .commit()
         }
     }
 
