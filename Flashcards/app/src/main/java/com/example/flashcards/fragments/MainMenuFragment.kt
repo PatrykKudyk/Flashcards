@@ -31,6 +31,8 @@ class MainMenuFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
+    private lateinit var creditsButton: Button
+    private lateinit var startButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +85,33 @@ class MainMenuFragment : Fragment() {
     }
 
     private fun initFragment() {
+        startButton = rootView.findViewById(R.id.main_menu_button_start)
+        creditsButton = rootView.findViewById(R.id.main_menu_button_credits)
 
+        creditsButton.setOnClickListener {
+            val creditsFragment = CreditsFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_bottom_to_top, R.anim.exit_top_to_bottom,
+                    R.anim.enter_top_to_bottom, R.anim.exit_bottom_to_top
+                )
+                ?.replace(R.id.main_frame_layout, creditsFragment)
+                ?.addToBackStack(CreditsFragment.toString())
+                ?.commit()
+        }
+
+        startButton.setOnClickListener {
+            val packagesFragment = PackagesFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.setCustomAnimations(
+                    R.anim.enter_left_to_right, R.anim.exit_right_to_left,
+                    R.anim.enter_right_to_left, R.anim.exit_left_to_right
+                )
+                ?.replace(R.id.main_frame_layout, packagesFragment)
+                ?.addToBackStack(PackagesFragment.toString())
+                ?.commit()
+        }
     }
 }
