@@ -62,9 +62,19 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
         }
 
         deleteButton.setOnClickListener {
+            holder.view.package_cell_linear_layout_main.visibility = View.GONE
+            holder.view.package_cell_linear_layout_delete.visibility = View.VISIBLE
+        }
+
+        deleteYes.setOnClickListener {
             packagesList.removeAt(position)
             notifyItemRemoved(position)
-            notifyItemRangeChanged(position,packagesList.size)
+            notifyItemRangeChanged(position, packagesList.size)
+        }
+
+        deleteNo.setOnClickListener {
+            holder.view.package_cell_linear_layout_main.visibility = View.VISIBLE
+            holder.view.package_cell_linear_layout_delete.visibility = View.GONE
         }
     }
 
