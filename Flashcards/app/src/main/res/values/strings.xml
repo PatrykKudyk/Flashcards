@@ -22,6 +22,5 @@
     <string name="button_add">Add</string>
     <string name="flashcard_add_new">Add new flashcard</string>
     <string name="flashcard_button_start_review">Start review</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="toast_flashcard_not_null">Flashcard fields cannot be empty</string>
 </resources>

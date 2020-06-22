@@ -8,14 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.EditText
+import android.widget.Toast
 import com.example.flashcards.R
 import com.example.flashcards.db.DataBaseHelper
-import com.example.flashcards.recyclers.FlashcardRecyclerViewAdapter
-import com.example.flashcards.recyclers.MarginItemDecoration
-import com.example.flashcards.recyclers.PackageRecyclerViewAdapter
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,15 +27,16 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FlashcardsFragment : Fragment() {
+class AddFlashcardFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: Long? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
-    private lateinit var addButton: LinearLayout
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var addButton: Button
+    private lateinit var questionEditText: EditText
+    private lateinit var answerEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +51,7 @@ class FlashcardsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_flashcards, container, false);
+        rootView = inflater.inflate(R.layout.fragment_add_flashcard, container, false);
         initFragment()
         return rootView
     }
@@ -85,7 +82,7 @@ class FlashcardsFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(param1: Long) =
-            FlashcardsFragment().apply {
+            AddFlashcardFragment().apply {
                 arguments = Bundle().apply {
                     putLong(ARG_PARAM1, param1)
                 }
@@ -93,33 +90,25 @@ class FlashcardsFragment : Fragment() {
     }
 
     private fun initFragment() {
-        addButton = rootView.findViewById(R.id.flashcards_linear_layout_add_new)
-        recyclerView = rootView.findViewById(R.id.flashcards_recycler_view)
-
-        val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
-        recyclerView.layoutManager = mLayoutManager
-        recyclerView.addItemDecoration(
-            MarginItemDecoration(
-                12
-            )
-        )
-        val dbHelper = DataBaseHelper(rootView.context)
-
-        recyclerView.adapter =
-            FlashcardRecyclerViewAdapter(dbHelper.getFlashcardsList(param1 as Long))
-
+        addButton = rootView.findViewById(R.id.add_flashcard_button_add)
+        questionEditText = rootView.findViewById(R.id.add_flashcard_question_edit_text)
+        answerEditText = rootView.findViewById(R.id.add_flashcard_answer_edit_text)
 
         addButton.setOnClickListener {
-            val addFlashcardFragment = AddFlashcardFragment.newInstance(param1 as Long)
-            fragmentManager
-                ?.beginTransaction()
-                ?.setCustomAnimations(
-                    R.anim.enter_left_to_right, R.anim.exit_right_to_left,
-                    R.anim.enter_right_to_left, R.anim.exit_left_to_right
+            if (questionEditText.text.toString() != "" && answerEditText.text.toString() != "") {
+                val dbHelper = DataBaseHelper(rootView.context)
+                dbHelper.addFlashcard(
+                    param1 as Long,
+                    questionEditText.text.toString(),
+                    answerEditText.text.toString()
                 )
-                ?.replace(R.id.main_frame_layout, addFlashcardFragment)
-                ?.addToBackStack(AddFlashcardFragment.toString())
-                ?.commit()
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_flashcard_not_null),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }
