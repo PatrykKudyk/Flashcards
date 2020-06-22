@@ -18,6 +18,7 @@
         app:strokeWidth="2dp">
 
         <LinearLayout
+            android:id="@+id/package_cell_linear_layout_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -25,10 +26,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/package_cell_name_edit_text_layout"
-                android:visibility="gone"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="80"
+                android:visibility="gone"
                 app:boxBackgroundColor="@color/colorMainLight"
                 app:boxStrokeColor="@color/colorPrimaryDark">
 
@@ -36,11 +37,11 @@
                     android:id="@+id/package_cell_name_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:fontFamily="@font/architectsdaughter"
                     android:hint="@string/hint_package_name"
                     android:inputType="textLongMessage"
-                    android:fontFamily="@font/architectsdaughter"
                     android:maxLength="30"
-                    android:textSize="20dip"/>
+                    android:textSize="20dip" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,7 +58,7 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"/>
+                android:layout_weight="4" />
 
             <ImageView
                 android:id="@+id/package_cell_image_view_edit"
@@ -66,8 +67,120 @@
                 android:layout_gravity="top"
                 android:layout_weight="10"
                 android:src="@drawable/ic_edit" />
+
+            <LinearLayout
+                android:id="@+id/package_cell_linear_layout_edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:weightSum="100">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="7" />
+
+                <ImageView
+                    android:id="@+id/package_cell_image_view_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="40"
+                    android:src="@drawable/ic_save" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="6" />
+
+                <ImageView
+                    android:id="@+id/package_cell_image_view_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="40"
+                    android:src="@drawable/ic_delete" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/package_cell_linear_layout_delete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="100">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="80"
+                android:orientation="vertical"
+                android:weightSum="100">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="50"
+                    android:fontFamily="@font/architectsdaughter"
+                    android:gravity="center"
+                    android:text="@string/delete_question_package"
+                    android:textSize="14dip" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="40"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10" />
+
+                    <Button
+                        android:id="@+id/package_cell_button_delete_no"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="30"
+                        android:background="@drawable/button_background_delete_no"
+                        android:fontFamily="@font/architectsdaughter"
+                        android:text="@string/button_delete_no"
+                        android:textAllCaps="false"
+                        android:textSize="15dip" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="20" />
+
+
+                    <Button
+                        android:id="@+id/package_cell_button_delete_yes"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="30"
+                        android:background="@drawable/button_background_delete_yes"
+                        android:fontFamily="@font/architectsdaughter"
+                        android:text="@string/button_delete_yes"
+                        android:textAllCaps="false"
+                        android:textSize="15dip" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

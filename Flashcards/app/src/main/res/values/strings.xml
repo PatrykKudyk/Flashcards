@@ -10,4 +10,7 @@
     <string name="hint_front_side">Front side of flashcard</string>
     <string name="hint_back_side">Back side of flashcard</string>
     <string name="toast_package_name_not_null">Package name cannot be empty</string>
+    <string name="button_delete_yes">Yes</string>
+    <string name="button_delete_no">No</string>
+    <string name="delete_question_package">Are you sure to delete package?</string>
 </resources>

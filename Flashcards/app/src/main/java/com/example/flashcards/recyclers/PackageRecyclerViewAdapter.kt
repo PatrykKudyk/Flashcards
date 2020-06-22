@@ -1,5 +1,6 @@
 package com.example.flashcards.recyclers
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,30 +25,44 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
 
     override fun onBindViewHolder(holder: PackageViewHolder, position: Int) {
         var editing = false
-        holder.view.package_cell_name.text = packagesList[position].title
-        holder.view.package_cell_image_view_edit.setOnClickListener {
-            if (editing) {
-                if (holder.view.package_cell_name_edit_text.text.toString() != "") {
-                    holder.view.package_cell_image_view_edit.setImageResource(R.drawable.ic_edit)
-                    holder.view.package_cell_name_edit_text_layout.visibility = View.GONE
-                    holder.view.package_cell_name.visibility = View.VISIBLE
-                    holder.view.package_cell_name.text =
-                        holder.view.package_cell_name_edit_text.text
-                    editing = false
-                } else {
-                    Toast.makeText(
-                        holder.view.context,
-                        holder.view.context.getString(R.string.toast_package_name_not_null),
-                        Toast.LENGTH_SHORT
-                    )
-                }
+        val title = holder.view.package_cell_name
+        val editButton = holder.view.package_cell_image_view_edit
+        val saveButton = holder.view.package_cell_image_view_save
+        val deleteButton = holder.view.package_cell_image_view_delete
+        val deleteYes = holder.view.package_cell_button_delete_yes
+        val deleteNo = holder.view.package_cell_button_delete_no
+        val titleEdit = holder.view.package_cell_name_edit_text
+
+
+
+
+        title.text = packagesList[position].title
+        editButton.setOnClickListener {
+            holder.view.package_cell_name_edit_text_layout.visibility = View.VISIBLE
+            holder.view.package_cell_linear_layout_edit.visibility = View.VISIBLE
+            editButton.visibility = View.GONE
+            title.visibility = View.GONE
+            titleEdit.setText(title.text.toString())
+        }
+        saveButton.setOnClickListener {
+            if (titleEdit.text.toString() != "") {
+                title.setText(titleEdit.text.toString())
+                holder.view.package_cell_name_edit_text_layout.visibility = View.GONE
+                holder.view.package_cell_linear_layout_edit.visibility = View.GONE
+                editButton.visibility = View.VISIBLE
+                title.visibility = View.VISIBLE
             } else {
-                holder.view.package_cell_image_view_edit.setImageResource(R.drawable.ic_save)
-                holder.view.package_cell_name_edit_text_layout.visibility = View.VISIBLE
-                holder.view.package_cell_name.visibility = View.GONE
-                holder.view.package_cell_name_edit_text.setText(holder.view.package_cell_name.text)
-                editing = true
+                Toast.makeText(
+                    holder.view.context,
+                    holder.view.context.getString(R.string.toast_package_name_not_null),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+        }
+
+        deleteButton.setOnClickListener {
+            packagesList.removeAt(position)
+            notifyItemRemoved(position)
         }
     }
 
