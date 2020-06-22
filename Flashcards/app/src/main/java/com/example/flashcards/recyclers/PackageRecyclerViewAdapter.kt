@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flashcards.R
+import com.example.flashcards.db.DataBaseHelper
 import com.example.flashcards.models.MyPackage
 import kotlinx.android.synthetic.main.row_package.view.*
 
@@ -47,11 +48,22 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
         }
         saveButton.setOnClickListener {
             if (titleEdit.text.toString() != "") {
-                title.setText(titleEdit.text.toString())
-                holder.view.package_cell_name_edit_text_layout.visibility = View.GONE
-                holder.view.package_cell_linear_layout_edit.visibility = View.GONE
-                editButton.visibility = View.VISIBLE
-                title.visibility = View.VISIBLE
+                packagesList[position].title = titleEdit.text.toString()
+                val dbHelper = DataBaseHelper(holder.view.context)
+                val result = dbHelper.updatePackage(packagesList[position])
+                if (result) {
+                    title.setText(titleEdit.text.toString())
+                    holder.view.package_cell_name_edit_text_layout.visibility = View.GONE
+                    holder.view.package_cell_linear_layout_edit.visibility = View.GONE
+                    editButton.visibility = View.VISIBLE
+                    title.visibility = View.VISIBLE
+                } else {
+                    Toast.makeText(
+                        holder.view.context,
+                        holder.view.context.getString(R.string.toast_package_not_changed),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             } else {
                 Toast.makeText(
                     holder.view.context,
@@ -67,6 +79,8 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
         }
 
         deleteYes.setOnClickListener {
+            val dbHelper = DataBaseHelper(holder.view.context)
+            val result = dbHelper.deletePackage(packagesList[position].id)
             packagesList.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, packagesList.size)

@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.os.Build.ID
 import android.provider.BaseColumns
 import com.example.flashcards.models.MyPackage
 
@@ -69,11 +70,32 @@ class DataBaseHelper(context: Context) :
     }
 
     fun addPackage(name: String): Boolean {
-        val db = writableDatabase
+        val db = this.writableDatabase
         val values = ContentValues()
         values.put(TableInfo.TABLE_COLUMN_PACKAGES_NAME, name)
         val success = db.insert(TableInfo.TABLE_NAME_PACKAGES, null, values)
         db.close()
         return (Integer.parseInt("$success") != -1)
+    }
+
+    fun updatePackage(myPackage: MyPackage): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(TableInfo.TABLE_COLUMN_PACKAGES_NAME, myPackage.title)
+        val success = db.update(
+            TableInfo.TABLE_NAME_PACKAGES, values, BaseColumns._ID + "=?",
+            arrayOf(myPackage.id.toString())
+        ).toLong()
+        return Integer.parseInt("$success") != -1
+    }
+
+
+    fun deletePackage(id: Long): Boolean {
+        val db = this.writableDatabase
+        val success =
+            db.delete(TableInfo.TABLE_NAME_PACKAGES, BaseColumns._ID + "=?", arrayOf(id.toString()))
+                .toLong()
+        db.close()
+        return Integer.parseInt("$success") != -1
     }
 }
