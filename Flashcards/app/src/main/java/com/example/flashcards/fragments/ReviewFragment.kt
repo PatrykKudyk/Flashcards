@@ -8,8 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import com.example.flashcards.R
+import com.example.flashcards.db.DataBaseHelper
 import com.example.flashcards.models.Flashcard
+import kotlinx.android.synthetic.main.fragment_add_package.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,6 +36,11 @@ class ReviewFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
+    private lateinit var nextButton: Button
+    private lateinit var previousButton: Button
+    private lateinit var helpView: View
+    private lateinit var cardView: CardView
+    private lateinit var mainTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +94,53 @@ class ReviewFragment : Fragment() {
     }
 
     private fun initFragment() {
+        nextButton = rootView.findViewById(R.id.review_button_next)
+        previousButton = rootView.findViewById(R.id.review_button_previous)
+        helpView = rootView.findViewById(R.id.review_view)
+        cardView = rootView.findViewById(R.id.review_card_view_main)
+        mainTextView = rootView.findViewById(R.id.review_text_view_main)
 
+        val dbHelper = DataBaseHelper(rootView.context)
+        val flashcardsList = dbHelper.getFlashcardsList(param1 as Long)
+        flashcardsList.shuffle()
+        mainTextView.setText(flashcardsList[0].question)
+        var number = 0
+        var question = true
+
+        cardView.setOnClickListener {
+            if (question) {
+                question = false
+                mainTextView.setText(flashcardsList[number].answer)
+            } else {
+                question = true
+                mainTextView.setText(flashcardsList[number].question)
+            }
+        }
+
+        nextButton.setOnClickListener {
+            number++
+            question = true
+            mainTextView.setText(flashcardsList[number].question)
+            if (number == flashcardsList.size - 1) {
+                nextButton.visibility = View.GONE
+            }
+            if (number >= 1) {
+                previousButton.visibility = View.VISIBLE
+                helpView.visibility = View.GONE
+            }
+        }
+
+        previousButton.setOnClickListener {
+            number--
+            question = true
+            mainTextView.setText(flashcardsList[number].question)
+            if (number == 0) {
+                previousButton.visibility = View.GONE
+                helpView.visibility = View.VISIBLE
+            }
+            if (number < flashcardsList.size - 1) {
+                nextButton.visibility = View.VISIBLE
+            }
+        }
     }
 }

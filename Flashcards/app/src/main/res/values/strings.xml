@@ -27,4 +27,6 @@
     <string name="review_title">Review</string>
     <string name="review_button_previous">Back</string>
     <string name="review_button_next">Next</string>
+    <string name="toast_no_flashcards_for_review">There are no flashcards to review</string>
+    <string name="toast_too_few_flashcards_for_review">There is too few flashcards to review</string>
 </resources>
