@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.os.Build.ID
 import android.provider.BaseColumns
+import com.example.flashcards.models.Flashcard
 import com.example.flashcards.models.MyPackage
 
 object TableInfo : BaseColumns {
@@ -94,6 +95,66 @@ class DataBaseHelper(context: Context) :
         val db = this.writableDatabase
         val success =
             db.delete(TableInfo.TABLE_NAME_PACKAGES, BaseColumns._ID + "=?", arrayOf(id.toString()))
+                .toLong()
+        db.close()
+        return Integer.parseInt("$success") != -1
+    }
+
+    fun getFlashcardsList(packageId: Long): ArrayList<Flashcard> {
+        var flascardsList = ArrayList<Flashcard>()
+        val db = readableDatabase
+        val selectQuery = "Select * from ${TableInfo.TABLE_NAME_FLASHCARDS} where ${TableInfo.TABLE_COLUMN_FLASHCARDS_PACKAGE} = " +
+                packageId.toString()
+        val result = db.rawQuery(selectQuery, null)
+        if (result.moveToFirst()) {
+            do {
+                var flashcard = Flashcard(
+                    result.getInt(result.getColumnIndex(BaseColumns._ID)).toLong(),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_PACKAGE)).toLong(),
+                    result.getString(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_QUESTION)),
+                    result.getString(result.getColumnIndex(TableInfo.TABLE_COLUMN_FLASHCARDS_ANSWER))
+                )
+                flascardsList.add(flashcard)
+            } while (result.moveToNext())
+        }
+        result.close()
+        db.close()
+        return flascardsList
+    }
+
+    fun addFlashcard(packageId: Long, question: String, answer: String): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(TableInfo.TABLE_COLUMN_FLASHCARDS_PACKAGE, packageId)
+        values.put(TableInfo.TABLE_COLUMN_FLASHCARDS_QUESTION, question)
+        values.put(TableInfo.TABLE_COLUMN_FLASHCARDS_ANSWER, answer)
+        val success = db.insert(TableInfo.TABLE_NAME_FLASHCARDS, null, values)
+        db.close()
+        return (Integer.parseInt("$success") != -1)
+    }
+
+    fun updateFlashcard(flashcard: Flashcard): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(TableInfo.TABLE_COLUMN_FLASHCARDS_QUESTION, flashcard.question)
+        values.put(TableInfo.TABLE_COLUMN_FLASHCARDS_ANSWER, flashcard.answer)
+        val success = db.update(
+            TableInfo.TABLE_NAME_FLASHCARDS, values, BaseColumns._ID + "=?",
+            arrayOf(flashcard.id.toString())
+        ).toLong()
+        db.close()
+        return Integer.parseInt("$success") != -1
+    }
+
+
+    fun deleteFlashcard(id: Long): Boolean {
+        val db = this.writableDatabase
+        val success =
+            db.delete(
+                TableInfo.TABLE_NAME_FLASHCARDS,
+                BaseColumns._ID + "=?",
+                arrayOf(id.toString())
+            )
                 .toLong()
         db.close()
         return Integer.parseInt("$success") != -1

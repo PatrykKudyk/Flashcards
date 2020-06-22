@@ -83,7 +83,13 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
 
         deleteYes.setOnClickListener {
             val dbHelper = DataBaseHelper(holder.view.context)
+            val flashcardList = dbHelper.getFlashcardsList(packagesList[position].id)
+            for (flashcard in flashcardList) {
+                dbHelper.deleteFlashcard(flashcard.id)
+            }
+
             val result = dbHelper.deletePackage(packagesList[position].id)
+
             packagesList.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, packagesList.size)

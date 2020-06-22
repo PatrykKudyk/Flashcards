@@ -19,7 +19,9 @@
     <string name="button_delete_yes">Yes</string>
     <string name="button_delete_no">No</string>
     <string name="delete_question_package">Are you sure to delete package?</string>
+    <string name="delete_question_flashcard">Are you sure to delete flashcard?</string>
     <string name="button_add">Add</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="flashcard_add_new">Add new flashcard</string>
+    <string name="flashcard_button_start_review">Start review</string>
+    <string name="toast_flashcard_not_null">Flashcard fields cannot be empty</string>
 </resources>
