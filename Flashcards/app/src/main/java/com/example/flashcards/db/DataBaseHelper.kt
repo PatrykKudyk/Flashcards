@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
+import com.example.flashcards.models.MyPackage
 
 object TableInfo : BaseColumns {
     const val DATABASE_NAME = "Flashcards"
@@ -47,4 +48,22 @@ class DataBaseHelper(context: Context) :
         onCreate(db)
     }
 
+    fun getPackagesList(): ArrayList<MyPackage> {
+        var packagesList = ArrayList<MyPackage>()
+        val db = readableDatabase
+        val selectQuery = "Select * from ${TableInfo.TABLE_NAME_PACKAGES}"
+        val result = db.rawQuery(selectQuery, null)
+        if (result.moveToFirst()) {
+            do {
+                var myPackage = MyPackage(
+                    result.getInt(result.getColumnIndex(BaseColumns._ID)).toLong(),
+                    result.getString(result.getColumnIndex(TableInfo.TABLE_NAME_PACKAGES))
+                )
+                packagesList.add(myPackage)
+            } while (result.moveToNext())
+        }
+        result.close()
+        db.close()
+        return packagesList
+    }
 }

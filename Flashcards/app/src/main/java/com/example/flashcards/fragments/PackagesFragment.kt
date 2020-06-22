@@ -3,6 +3,7 @@ package com.example.flashcards.fragments
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.provider.BaseColumns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flashcards.R
+import com.example.flashcards.db.DataBaseHelper
+import com.example.flashcards.db.TableInfo
 import com.example.flashcards.models.MyPackage
 import com.example.flashcards.recyclers.MarginItemDecoration
 import com.example.flashcards.recyclers.PackageRecyclerViewAdapter
@@ -101,11 +104,9 @@ class PackagesFragment : Fragment() {
                 12
             )
         )
-        val arrayList = ArrayList<MyPackage>()
-        arrayList.add(MyPackage(1, "Fiszki z angielskiego"))
-        arrayList.add(MyPackage(2, "Fiszki z niemieckiego"))
-        arrayList.add(MyPackage(3, "Fiszki z włoskiego"))
-        recyclerView.adapter = PackageRecyclerViewAdapter(arrayList)
+        val dbHelper = DataBaseHelper(rootView.context)
+
+        recyclerView.adapter = PackageRecyclerViewAdapter(dbHelper.getPackagesList())
 
         addButton.setOnClickListener {
             val addPackageFragment = AddPackageFragment.newInstance()
