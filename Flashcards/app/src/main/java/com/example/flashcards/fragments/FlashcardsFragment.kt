@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flashcards.R
@@ -40,6 +41,7 @@ class FlashcardsFragment : Fragment() {
     private lateinit var rootView: View
     private lateinit var addButton: LinearLayout
     private lateinit var recyclerView: RecyclerView
+    private lateinit var reviewButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +97,7 @@ class FlashcardsFragment : Fragment() {
     private fun initFragment() {
         addButton = rootView.findViewById(R.id.flashcards_linear_layout_add_new)
         recyclerView = rootView.findViewById(R.id.flashcards_recycler_view)
+        reviewButton = rootView.findViewById(R.id.flashcards_button_review)
 
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = mLayoutManager
@@ -104,9 +107,10 @@ class FlashcardsFragment : Fragment() {
             )
         )
         val dbHelper = DataBaseHelper(rootView.context)
+        val flashcardList = dbHelper.getFlashcardsList(param1 as Long)
 
         recyclerView.adapter =
-            FlashcardRecyclerViewAdapter(dbHelper.getFlashcardsList(param1 as Long))
+            FlashcardRecyclerViewAdapter(flashcardList)
 
 
         addButton.setOnClickListener {
@@ -120,6 +124,34 @@ class FlashcardsFragment : Fragment() {
                 ?.replace(R.id.main_frame_layout, addFlashcardFragment)
                 ?.addToBackStack(AddFlashcardFragment.toString())
                 ?.commit()
+        }
+
+        reviewButton.setOnClickListener {
+            if (flashcardList.size == 0) {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_no_flashcards_for_review),
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (flashcardList.size == 1) {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_too_few_flashcards_for_review),
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+                val reviewFragment = ReviewFragment.newInstance(param1 as Long)
+                fragmentManager
+                    ?.beginTransaction()
+                    ?.setCustomAnimations(
+                        R.anim.enter_left_to_right, R.anim.exit_right_to_left,
+                        R.anim.enter_right_to_left, R.anim.exit_left_to_right
+                    )
+                    ?.replace(R.id.main_frame_layout, reviewFragment)
+                    ?.addToBackStack(ReviewFragment.toString())
+                    ?.commit()
+            }
         }
     }
 }
