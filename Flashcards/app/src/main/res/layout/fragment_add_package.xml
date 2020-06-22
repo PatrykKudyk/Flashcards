@@ -42,7 +42,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/package_cell_name_edit_text_layout"
+                android:id="@+id/add_package_name_edit_text_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
@@ -50,7 +50,7 @@
                 app:boxStrokeColor="@color/colorPrimaryDark">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/package_cell_name_edit_text"
+                    android:id="@+id/add_package_name_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/architectsdaughter"
