@@ -8,7 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import com.example.flashcards.R
+import com.example.flashcards.db.DataBaseHelper
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,8 +34,8 @@ class AddPackageFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
-    private lateinit var creditsButton: Button
-    private lateinit var startButton: Button
+    private lateinit var addButton: Button
+    private lateinit var nameEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +88,35 @@ class AddPackageFragment : Fragment() {
     }
 
     private fun initFragment() {
+        addButton = rootView.findViewById(R.id.add_package_button_add)
+        nameEditText = rootView.findViewById(R.id.add_package_name_edit_text)
 
+        addButton.setOnClickListener {
+            if (nameEditText.text.toString() != "") {
+                val dbHelper = DataBaseHelper(rootView.context)
+                val result = dbHelper.addPackage(nameEditText.text.toString())
+                if (result) {
+                    Toast.makeText(
+                        rootView.context,
+                        rootView.context.getString(R.string.toast_package_added),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    fragmentManager
+                        ?.popBackStack()
+                } else {
+                    Toast.makeText(
+                        rootView.context,
+                        rootView.context.getString(R.string.toast_package_not_added),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_package_name_not_null),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 }
