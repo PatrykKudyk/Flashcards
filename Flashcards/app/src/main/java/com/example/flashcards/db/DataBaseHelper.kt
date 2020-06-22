@@ -66,4 +66,8 @@ class DataBaseHelper(context: Context) :
         db.close()
         return packagesList
     }
+
+    fun addPackage(myPackage: MyPackage) {
+
+    }
 }
