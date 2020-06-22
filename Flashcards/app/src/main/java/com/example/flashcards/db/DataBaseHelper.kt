@@ -1,5 +1,6 @@
 package com.example.flashcards.db
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -57,7 +58,7 @@ class DataBaseHelper(context: Context) :
             do {
                 var myPackage = MyPackage(
                     result.getInt(result.getColumnIndex(BaseColumns._ID)).toLong(),
-                    result.getString(result.getColumnIndex(TableInfo.TABLE_NAME_PACKAGES))
+                    result.getString(result.getColumnIndex(TableInfo.TABLE_COLUMN_PACKAGES_NAME))
                 )
                 packagesList.add(myPackage)
             } while (result.moveToNext())
@@ -67,7 +68,12 @@ class DataBaseHelper(context: Context) :
         return packagesList
     }
 
-    fun addPackage(myPackage: MyPackage) {
-
+    fun addPackage(name: String): Boolean {
+        val db = writableDatabase
+        val values = ContentValues()
+        values.put(TableInfo.TABLE_COLUMN_PACKAGES_NAME, name)
+        val success = db.insert(TableInfo.TABLE_NAME_PACKAGES, null, values)
+        db.close()
+        return (Integer.parseInt("$success") != -1)
     }
 }
