@@ -24,4 +24,7 @@
     <string name="flashcard_add_new">Add new flashcard</string>
     <string name="flashcard_button_start_review">Start review</string>
     <string name="toast_flashcard_not_null">Flashcard fields cannot be empty</string>
+    <string name="review_title">Review</string>
+    <string name="review_button_previous">Back</string>
+    <string name="review_button_next">Next</string>
 </resources>

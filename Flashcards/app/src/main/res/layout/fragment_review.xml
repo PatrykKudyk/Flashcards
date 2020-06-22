@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ReviewFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/review_text_view_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fontFamily="@font/architectsdaughter"
+            android:gravity="center"
+            android:text="@string/review_title"
+            android:textSize="30dip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view1" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/review_card_view_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:cardBackgroundColor="@color/colorMainLight"
+            app:cardCornerRadius="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review_text_view_title"
+            app:strokeColor="@color/colorMainMediumDark"
+            app:strokeWidth="2dp">
+
+            <TextView
+                android:id="@+id/review_text_view_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:fontFamily="@font/architectsdaughter"
+                android:gravity="center"
+                android:text="Ile to jest 2 + 2? Co?"
+                android:textSize="35dip" />
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:id="@id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review_card_view_main" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:weightSum="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view2"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/review_button_previous"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="40"
+                android:text="@string/review_button_previous"
+                android:visibility="gone"
+                android:textSize="22dip"
+                android:textColor="@color/colorBackground"
+                android:fontFamily="@font/architectsdaughter"
+                android:background="@drawable/button_background_medium" />
+
+            <View
+                android:id="@+id/review_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="40"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20" />
+
+            <Button
+                android:id="@+id/review_button_next"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="40"
+                android:text="@string/review_button_next"
+                android:fontFamily="@font/architectsdaughter"
+                android:textSize="22dip"
+                android:textColor="@color/colorBackground"
+                android:background="@drawable/button_background_dark" />
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
