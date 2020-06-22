@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -18,12 +19,13 @@
         app:strokeWidth="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/flashcard_cell_constraint_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/flashcard_cell_text_view_question"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
@@ -32,7 +34,19 @@
                 android:textSize="18dip"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.70" />
+
+            <ImageView
+                android:id="@+id/flashcard_cell_image_view_delete"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/flashcard_cell_text_view_question"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.2" />
 
 
             <View
@@ -83,6 +97,54 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/flashcard_cell_constraint_delete"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/flashcard_cell_text_view_delete"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:fontFamily="@font/architectsdaughter"
+                android:gravity="center"
+                android:text="@string/delete_question_flashcard"
+                android:textSize="15dip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <Button
+                android:id="@+id/flashcard_cell_button_delete_no"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_background_delete_no"
+                android:fontFamily="@font/architectsdaughter"
+                android:text="@string/button_delete_no"
+                android:textAllCaps="false"
+                android:textSize="15dip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.30"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flashcard_cell_text_view_delete" />
+
+            <Button
+                android:id="@+id/flashcard_cell_button_delete_yes"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_background_delete_yes"
+                android:fontFamily="@font/architectsdaughter"
+                android:text="@string/button_delete_yes"
+                android:textAllCaps="false"
+                android:textSize="15dip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintStart_toEndOf="@+id/flashcard_cell_button_delete_no"
+                app:layout_constraintTop_toBottomOf="@+id/flashcard_cell_text_view_delete" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
