@@ -102,6 +102,8 @@ class AddFlashcardFragment : Fragment() {
                     questionEditText.text.toString(),
                     answerEditText.text.toString()
                 )
+                fragmentManager
+                    ?.popBackStack()
             } else {
                 Toast.makeText(
                     rootView.context,

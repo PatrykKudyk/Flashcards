@@ -23,7 +23,8 @@ class FlashcardRecyclerViewAdapter(var flashcardList: ArrayList<Flashcard>) :
     }
 
     override fun onBindViewHolder(holder: FlascardViewHolder, position: Int) {
-
+        holder.view.flashcard_cell_text_view_question.setText(flashcardList[position].question)
+        holder.view.flashcard_cell_text_view_answer.setText(flashcardList[position].answer)
     }
 
 }
