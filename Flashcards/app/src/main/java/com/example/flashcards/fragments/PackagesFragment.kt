@@ -103,6 +103,8 @@ class PackagesFragment : Fragment() {
         )
         val arrayList = ArrayList<MyPackage>()
         arrayList.add(MyPackage(1, "Fiszki z angielskiego"))
+        arrayList.add(MyPackage(2, "Fiszki z niemieckiego"))
+        arrayList.add(MyPackage(3, "Fiszki z włoskiego"))
         recyclerView.adapter = PackageRecyclerViewAdapter(arrayList)
 
         addButton.setOnClickListener {

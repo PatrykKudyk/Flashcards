@@ -1,6 +1,7 @@
 package com.example.flashcards.recyclers
 
 import android.content.Context
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,6 +64,7 @@ class PackageRecyclerViewAdapter(var packagesList: ArrayList<MyPackage>) :
         deleteButton.setOnClickListener {
             packagesList.removeAt(position)
             notifyItemRemoved(position)
+            notifyItemRangeChanged(position,packagesList.size)
         }
     }
 
