@@ -4,5 +4,22 @@
     <string name="button_start_learning">Start learning</string>
     <string name="button_credits">Credits</string>
     <string name="author">App made by\nPatryk Kudyk</string>
-    <string name="icons_author_1">Icons made by\nPixel perfect\n from flaticon.com</string>
+    <string name="icons_author_1">Icons made by\nFreepik\n from flaticon.com</string>
+    <string name="package_add_new">Add new package</string>
+    <string name="hint_package_name">Package name</string>
+    <string name="hint_front_side">Front side of flashcard</string>
+    <string name="hint_back_side">Back side of flashcard</string>
+    <string name="toast_package_name_not_null">Package name cannot be empty</string>
+    <string name="toast_package_added">Package successfully added</string>
+    <string name="toast_package_not_added">Something went wrong, try again</string>
+    <string name="toast_package_changed">Package successfully changed</string>
+    <string name="toast_package_not_changed">Something went wrong, try again</string>
+    <string name="toast_package_deleted">Package successfully deleted</string>
+    <string name="toast_package_not_deleted">Something went wrong, try again</string>
+    <string name="button_delete_yes">Yes</string>
+    <string name="button_delete_no">No</string>
+    <string name="delete_question_package">Are you sure to delete package?</string>
+    <string name="button_add">Add</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
