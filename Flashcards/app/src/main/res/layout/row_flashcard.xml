@@ -21,6 +21,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/flashcard_cell_constraint_main"
             android:layout_width="match_parent"
+            tools:visibility="gone"
             android:layout_height="wrap_content">
 
             <TextView
@@ -101,6 +102,7 @@
             android:id="@+id/flashcard_cell_constraint_delete"
             android:visibility="gone"
             android:layout_width="match_parent"
+            tools:visibility="visible"
             android:layout_height="wrap_content">
 
             <TextView
@@ -117,20 +119,6 @@
 
 
             <Button
-                android:id="@+id/flashcard_cell_button_delete_no"
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:background="@drawable/button_background_delete_no"
-                android:fontFamily="@font/architectsdaughter"
-                android:text="@string/button_delete_no"
-                android:textAllCaps="false"
-                android:textSize="15dip"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.30"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/flashcard_cell_text_view_delete" />
-
-            <Button
                 android:id="@+id/flashcard_cell_button_delete_yes"
                 android:layout_width="70dp"
                 android:layout_height="40dp"
@@ -140,8 +128,22 @@
                 android:textAllCaps="false"
                 android:textSize="15dip"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.30"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flashcard_cell_text_view_delete" />
+
+            <Button
+                android:id="@+id/flashcard_cell_button_delete_no"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_background_delete_no"
+                android:fontFamily="@font/architectsdaughter"
+                android:text="@string/button_delete_no"
+                android:textAllCaps="false"
+                android:textSize="15dip"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.3"
-                app:layout_constraintStart_toEndOf="@+id/flashcard_cell_button_delete_no"
+                app:layout_constraintStart_toEndOf="@+id/flashcard_cell_button_delete_yes"
                 app:layout_constraintTop_toBottomOf="@+id/flashcard_cell_text_view_delete" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
