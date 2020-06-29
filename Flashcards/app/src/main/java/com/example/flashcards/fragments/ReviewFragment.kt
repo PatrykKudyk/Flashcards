@@ -3,6 +3,7 @@ package com.example.flashcards.fragments
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -103,6 +104,7 @@ class ReviewFragment : Fragment() {
         val dbHelper = DataBaseHelper(rootView.context)
         val flashcardsList = dbHelper.getFlashcardsList(param1 as Long)
         flashcardsList.shuffle()
+        setTextSize(flashcardsList[0].question)
         mainTextView.setText(flashcardsList[0].question)
         var number = 0
         var question = true
@@ -110,9 +112,11 @@ class ReviewFragment : Fragment() {
         cardView.setOnClickListener {
             if (question) {
                 question = false
+                setTextSize(flashcardsList[number].answer)
                 mainTextView.setText(flashcardsList[number].answer)
             } else {
                 question = true
+                setTextSize(flashcardsList[number].question)
                 mainTextView.setText(flashcardsList[number].question)
             }
         }
@@ -120,6 +124,7 @@ class ReviewFragment : Fragment() {
         nextButton.setOnClickListener {
             number++
             question = true
+            setTextSize(flashcardsList[number].question)
             mainTextView.setText(flashcardsList[number].question)
             if (number == flashcardsList.size - 1) {
                 nextButton.visibility = View.GONE
@@ -133,6 +138,7 @@ class ReviewFragment : Fragment() {
         previousButton.setOnClickListener {
             number--
             question = true
+            setTextSize(flashcardsList[number].question)
             mainTextView.setText(flashcardsList[number].question)
             if (number == 0) {
                 previousButton.visibility = View.GONE
@@ -141,6 +147,16 @@ class ReviewFragment : Fragment() {
             if (number < flashcardsList.size - 1) {
                 nextButton.visibility = View.VISIBLE
             }
+        }
+    }
+
+    private fun setTextSize(string: String){
+        if(string.length <= 40) {
+            mainTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 35F)
+        } else if (string.length <= 50) {
+            mainTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30F)
+        } else if (string.length <= 70) {
+            mainTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24F)
         }
     }
 }
