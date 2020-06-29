@@ -6,126 +6,125 @@
     android:layout_height="match_parent"
     tools:context=".fragments.AddFlashcardFragment">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackground">
+        android:background="@color/colorBackground"
+        android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/title"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:fontFamily="@font/architectsdaughter"
-            android:gravity="center"
-            android:text="@string/flashcard_add_new"
-            android:textSize="26dip"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackground"
+            android:gravity="center|top"
+            android:orientation="vertical">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:theme="@style/Theme.MaterialComponents.Light"
-            app:cardBackgroundColor="@color/colorMainLight"
-            app:cardCornerRadius="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            app:strokeColor="@color/colorMainMediumDark"
-            app:strokeWidth="2dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_height="100dp"
+                android:fontFamily="@font/architectsdaughter"
+                android:gravity="center"
+                android:text="@string/flashcard_add_new"
+                android:textSize="26dip" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/add_flashcard_question_edit_text_layout"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                app:cardBackgroundColor="@color/colorMainLight"
+                app:cardCornerRadius="18dp"
+                app:strokeColor="@color/colorMainDark"
+                app:strokeWidth="2dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:boxBackgroundColor="@color/colorMainLight"
-                    app:boxStrokeColor="@color/colorPrimaryDark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/add_flashcard_question_edit_text"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/add_flashcard_question_edit_text_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/architectsdaughter"
-                        android:hint="@string/hint_front_side"
-                        android:inputType="textLongMessage"
-                        android:maxLength="40"
-                        android:textSize="20dip" />
+                        android:layout_height="125dp"
+                        app:boxBackgroundColor="@color/colorMainLight"
+                        app:boxStrokeColor="@color/colorPrimaryDark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add_flashcard_question_edit_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/architectsdaughter"
+                            android:hint="@string/hint_front_side"
+                            android:inputType="textLongMessage"
+                            android:maxLength="40"
+                            android:textSize="20dip" />
 
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/add_flashcard_answer_edit_text_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:boxBackgroundColor="@color/colorMainLight"
-                    app:boxStrokeColor="@color/colorPrimaryDark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/add_flashcard_question_edit_text_layout">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/add_flashcard_answer_edit_text"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/add_flashcard_answer_edit_text_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/architectsdaughter"
-                        android:hint="@string/hint_back_side"
-                        android:inputType="textLongMessage"
-                        android:maxLength="100"
-                        android:textSize="20dip" />
+                        android:layout_height="125dp"
+                        app:boxBackgroundColor="@color/colorMainLight"
+                        app:boxStrokeColor="@color/colorPrimaryDark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add_flashcard_answer_edit_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/architectsdaughter"
+                            android:hint="@string/hint_back_side"
+                            android:inputType="textLongMessage"
+                            android:maxLength="70"
+                            android:textSize="20dip" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
 
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
 
-        <View
-            android:id="@+id/view1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.03"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
 
-        <Button
-            android:id="@+id/add_flashcard_button_add"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/button_background_dark"
-            android:fontFamily="@font/architectsdaughter"
-            android:text="@string/button_add"
-            android:textAllCaps="false"
-            android:textColor="@color/colorBackground"
-            android:textSize="20dip"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.07"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view1"
-            app:layout_constraintWidth_percent="0.5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="15" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/add_flashcard_button_add"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70"
+                    android:background="@drawable/button_background_dark"
+                    android:fontFamily="@font/architectsdaughter"
+                    android:text="@string/button_add"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="20dip" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </FrameLayout>
