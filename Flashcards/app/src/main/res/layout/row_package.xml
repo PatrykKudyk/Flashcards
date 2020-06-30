@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground">
 
     <com.google.android.material.card.MaterialCardView
@@ -23,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            tools:visibility="gone"
             android:weightSum="100">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -113,6 +115,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:visibility="gone"
+            tools:visibility="visible"
             android:weightSum="100">
 
             <View
@@ -149,13 +152,13 @@
                         android:layout_weight="10" />
 
                     <Button
-                        android:id="@+id/package_cell_button_delete_no"
+                        android:id="@+id/package_cell_button_delete_yes"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="30"
-                        android:background="@drawable/button_background_delete_no"
+                        android:background="@drawable/button_background_delete_yes"
                         android:fontFamily="@font/architectsdaughter"
-                        android:text="@string/button_delete_no"
+                        android:text="@string/button_delete_yes"
                         android:textAllCaps="false"
                         android:textSize="15dip" />
 
@@ -166,13 +169,13 @@
 
 
                     <Button
-                        android:id="@+id/package_cell_button_delete_yes"
+                        android:id="@+id/package_cell_button_delete_no"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="30"
-                        android:background="@drawable/button_background_delete_yes"
+                        android:background="@drawable/button_background_delete_no"
                         android:fontFamily="@font/architectsdaughter"
-                        android:text="@string/button_delete_yes"
+                        android:text="@string/button_delete_no"
                         android:textAllCaps="false"
                         android:textSize="15dip" />
 

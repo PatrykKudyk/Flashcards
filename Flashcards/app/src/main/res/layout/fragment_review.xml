@@ -55,8 +55,8 @@
                 android:layout_margin="16dp"
                 android:fontFamily="@font/architectsdaughter"
                 android:gravity="center"
-                android:text="Ile to jest 2 + 2? Co?"
-                android:textSize="35dip" />
+                tools:text="Ile to jest 2 + 2? Co?"
+                tools:textSize="35dip" />
 
 
         </com.google.android.material.card.MaterialCardView>

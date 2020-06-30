@@ -39,7 +39,27 @@ class FlashcardRecyclerViewAdapter(var flashcardList: ArrayList<Flashcard>) :
             val result = dbHelper.deleteFlashcard(flashcardList[position].id)
             flashcardList.removeAt(position)
             notifyItemRemoved(position)
-            notifyItemRangeChanged(position, flashcardList.size)
+            notifyItemRangeChanged(0, flashcardList.size)
+            holder.view.flashcard_cell_constraint_main.visibility = View.VISIBLE
+            holder.view.flashcard_cell_constraint_delete.visibility = View.GONE
+        }
+        holder.view.flashcard_cell_image_view_edit.setOnClickListener {
+            holder.view.flashcard_cell_constraint_main.visibility = View.GONE
+            holder.view.flashcard_cell_constraint_edit.visibility = View.VISIBLE
+            holder.view.flashcard_cell_edit_text_view_answer.setText(holder.view.flashcard_cell_text_view_answer.text)
+            holder.view.flashcard_cell_edit_text_view_question.setText(holder.view.flashcard_cell_text_view_question.text)
+        }
+        holder.view.flashcard_cell_image_view_save.setOnClickListener {
+            val dbHelper = DataBaseHelper(holder.view.context)
+            flashcardList[position].question =
+                holder.view.flashcard_cell_edit_text_view_question.text.toString()
+            flashcardList[position].answer =
+                holder.view.flashcard_cell_edit_text_view_answer.text.toString()
+            dbHelper.updateFlashcard(flashcardList[position])
+            holder.view.flashcard_cell_text_view_question.setText(holder.view.flashcard_cell_edit_text_view_question.text)
+            holder.view.flashcard_cell_text_view_answer.setText(holder.view.flashcard_cell_edit_text_view_answer.text)
+            holder.view.flashcard_cell_constraint_main.visibility = View.VISIBLE
+            holder.view.flashcard_cell_constraint_edit.visibility = View.GONE
         }
     }
 
